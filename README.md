@@ -8,7 +8,7 @@ This is a submission for the "Big Numbers" practice.
 **src/big_numbers.py** contains the implementation of the class BigNumber.
 
 **src/U64.py** contains the implementation of the class U64, which emulates unsigned integer of 64 bits with overflows 
-and so on used by the BigNumber class.
+and so on. It is used by the BigNumber class.
 
 **tests/** folder contains the unit tests.
 
