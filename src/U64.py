@@ -46,6 +46,19 @@ class U64:
             value //= 2
         return output
 
+    @classmethod
+    def from_bin(cls, byte_string: str):
+        """Initialize a U64 object from a bytes object."""
+        if len(byte_string) > 64:
+            raise ValueError("Byte string too long. Must be up to 64 bytes.")
+        byte_string = '0' * (64 - len(byte_string)) + byte_string
+        output = U64(0)
+        pow_value = len(byte_string) - 1
+        for char in byte_string:
+            output += U64(int(char) * 2 ** pow_value)
+            pow_value -= 1
+        return output
+
     def __add__(self, other: Union['U64', int]):
         """Add two U64 objects."""
         return U64(self.value + other.value) if isinstance(other, U64) else U64(self.value + other)
@@ -69,3 +82,11 @@ class U64:
     def __lt__(self, other: Union['U64', int]):
         """Compare two U64 objects."""
         return self.value < other.value if isinstance(other, U64) else self.value < other
+
+    def __sub__(self, other: Union['U64', int]):
+        """Subtract two U64 objects."""
+        return U64(self.value - other.value) if isinstance(other, U64) else U64(self.value - other)
+
+    def __xor__(self, other):
+        """XOR two U64 objects."""
+        return U64(self.value ^ other.value) if isinstance(other, U64) else U64(self.value ^ other)
